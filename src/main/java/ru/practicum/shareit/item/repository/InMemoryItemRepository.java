@@ -39,16 +39,20 @@ public class InMemoryItemRepository implements ItemRepository {
     public Item updateItem(Long itemId, Item updItem, User user) {
         return getItemById(itemId)
                 .map(item -> {
-                    if (updItem.getName() != null)
+                    if (updItem.getName() != null) {
                         item.setName(updItem.getName());
-                    if (updItem.getDescription() != null)
+                    }
+                    if (updItem.getDescription() != null) {
                         item.setDescription(updItem.getDescription());
-                    if (updItem.getAvailable() != null)
+                    }
+                    if (updItem.getAvailable() != null) {
                         item.setAvailable(updItem.getAvailable());
+                    }
                     return item;
                 })
                 .orElse(null);
     }
+
 
     @Override
     public List<Item> findItems(String text) {

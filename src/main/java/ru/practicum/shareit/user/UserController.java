@@ -17,6 +17,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(path = "/users")
+@Validated
 
 public class UserController extends ExceptionHandlerController {
 
@@ -33,7 +34,6 @@ public class UserController extends ExceptionHandlerController {
     }
 
     @PostMapping
-    @Validated
     public UserDto addUser(@Valid @RequestBody UserDto userDto) {
         return userService.addUser(userDto);
     }
