@@ -26,7 +26,7 @@ public class Booking {
     @JoinColumn(name = "item_id")
     @ToString.Exclude
     private Item item;
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     @ToString.Exclude
     private User booker;
@@ -54,6 +54,6 @@ public class Booking {
 
     @Override
     public int hashCode() {
-        return getClass().hashCode();
+        return Objects.hash(getId(), getStatus(), getItem(), getBooker());
     }
 }

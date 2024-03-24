@@ -35,7 +35,8 @@ public class UserServiceImpl implements UserService {
     public List<UserDto> getAll() {
         List<UserDto> allUsers = new ArrayList<>();
 
-        Pageable page = PageRequest.of(DEFAULT_START_PAGE, DEFAULT_PAGE_SIZE, Sort.by("id"));
+        int pageNumber = DEFAULT_START_PAGE;
+        Pageable page = PageRequest.of(pageNumber, DEFAULT_PAGE_SIZE, Sort.by("id"));
 
         while (true) {
             Page<User> userPage = userStorage.findAll(page);
@@ -48,12 +49,13 @@ public class UserServiceImpl implements UserService {
                 break;
             }
 
-            page = userPage.nextPageable();
+            page = PageRequest.of(++pageNumber, DEFAULT_PAGE_SIZE, Sort.by("id"));
         }
 
         log.info("Retrieved a list of users with size {}", allUsers.size());
         return allUsers;
     }
+
 
     @Override
     @Transactional
@@ -93,7 +95,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    @Transactional
     public void deleteUser(long userId) {
         try {
             userStorage.deleteById(userId);

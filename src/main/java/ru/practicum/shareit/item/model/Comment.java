@@ -39,6 +39,7 @@ public class Comment {
 
     @Override
     public int hashCode() {
-        return getClass().hashCode();
+        return Objects.hash(getId(), getItem(), getAuthor());
     }
+
 }

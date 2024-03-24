@@ -123,7 +123,6 @@ public class BookingServiceImpl implements BookingService {
         return BookingMapper.toBookingDto(booking);
     }
 
-    //быть может отдел. класс для валидации
     private void validateBookingOwnership(long userId, Booking booking) {
         boolean isBooker = booking.getBooker().getId().equals(userId);
         boolean isItemOwner = booking.getItem().getUser().getId().equals(userId);
